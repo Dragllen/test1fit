@@ -1,0 +1,32 @@
+services:
+    db:
+        image: postgres:13
+        volumes:
+            - ./db:/var/lib/postgresql/data/pgdata
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_USER=user
+            - POSTGRES_DB=mydatabase
+            - POSTGRES_PASSWORD=12345
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        networks:
+          - currency_exchange_net
+    currency_exchange:
+      image: currency_exchange_app:1.0
+      # restart: always
+      build:
+        context: .
+        dockerfile: Dockerfile
+      volumes:
+        - .:/app
+      networks:
+        - currency_exchange_net
+      depends_on:
+        - db
+
+
+
+networks:
+  currency_exchange_net:
+    driver: bridge
