@@ -21,7 +21,7 @@ def get_currencies_rate(today_date,curencies):
     return exchange_rates
 
 def database_upload(currencies_df):
-    
+
     conn_postgre = sqlalchemy.create_engine(
     f'postgresql+psycopg2'
     f'://{os.getenv("POSTGRE_USER")}'
@@ -38,10 +38,8 @@ def main():
     load_dotenv()
     today_date =  datetime.today().date()
     curencies = ['MYR','KZT','KGS','UZS','AZN']
-    logger.warning('main_function start')
     exchange_rates = get_currencies_rate(today_date,curencies)
-    logger.warning('main function ended')
-    
+
     logger.warning('trying to connect to db')
     try:
         database_upload(exchange_rates)    
@@ -50,5 +48,4 @@ def main():
     else:
         logger.warning('connected  to db')
 if __name__ == "__main__":
-    logger.warning('project start')
     main()
