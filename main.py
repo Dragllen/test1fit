@@ -32,7 +32,7 @@ def database_upload(currencies_df):
 )
 
     with conn_postgre.begin() as con:
-        currencies_df.to_sql('daily_exchange_rate_usd', schema = 'public', con=con, if_exists='replace', index=False)  
+        currencies_df.to_sql('daily_exchange_rate_usd', schema = 'public', con=con, if_exists='append', index=False)  
 
 def main():
     load_dotenv()

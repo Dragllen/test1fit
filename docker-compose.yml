@@ -14,7 +14,6 @@ services:
           - currency_exchange_net
     currency_exchange:
       image: currency_exchange_app:1.0
-      # restart: always
       build:
         context: .
         dockerfile: Dockerfile
