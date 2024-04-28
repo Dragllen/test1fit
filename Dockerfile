@@ -11,4 +11,3 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 COPY . /app
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
-# CMD [ "sleep infinity" ]
