@@ -2,12 +2,13 @@ FROM python:3.10
 RUN mkdir /app
 WORKDIR /app
 
-
 COPY ./requirements.txt /app/requirements.txt
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip
 
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . /app
 
-CMD [ "python", "./main.py" ]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+# CMD [ "sleep infinity" ]
